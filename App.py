@@ -2,7 +2,7 @@ from Result import Result
 from classReader import readFile
 from pyFilesReader import getAllFilePaths
 
-def analizeDirectory(dir: str):
+def scanDirectory(dir: str):
     paths = []
 
     directoryCount = getAllFilePaths(dir, paths)
@@ -32,4 +32,4 @@ def writeReportIntoFile(classCount: int, methodCount: int, results: list[Result]
     pass
         
 
-analizeDirectory("testDir")
+scanDirectory("testDir")
