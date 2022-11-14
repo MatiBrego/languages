@@ -18,18 +18,19 @@ def readFile(path: str) -> list[Result]:
         if cls != None:
             currentLine += 1
             methods = []
-            readMethodsInClass(methods, currentLine, lines)
+            currentLine = readMethodsInClass(methods, currentLine, lines)
+
             resultList.append(Result(cls.group(1), methods))
-            break
+
             
         if method != None:
             resultList.append(Result(None, [method.group(1)]))
-        
+
         currentLine += 1
 
     return resultList
         
-def readMethodsInClass(methods: list[str], currentLine: int, lines: list[str]):
+def readMethodsInClass(methods: list[str], currentLine: int, lines: list[str]) -> int:
     """
     Reads each method's name of a class and adds them into a list received as a parameter. 
     It also receives the current line from which to start, and updates it as the lines are read.
@@ -40,12 +41,23 @@ def readMethodsInClass(methods: list[str], currentLine: int, lines: list[str]):
         cls = re.search(r"class ([a-zA-Z]+):", line)
         method = re.search(r"def ([a-zA-Z]+)", line)
 
+
         if cls != None:
+            currentLine -=1
             break
 
-        if(method != None):
+        if(method != None and lines[currentLine][0] == " "):
             methods.append(method.group(1))
+
+
+        #Esto se lo tuvimos que agregar porque si había un metodo suelto, no lo leía.
+        if(method!= None and lines[currentLine][0] != " "):
+            currentLine-=1
+            break
+
 
         currentLine += 1
 
-    return methods
+    #return methods
+    return currentLine
+    #tuvimos que poner return current line porque sino no te leía dos clases que estaban en un mismo archivo.
