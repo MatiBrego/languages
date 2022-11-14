@@ -35,11 +35,14 @@ def writeReportIntoFile(
     methodCount: int,
     results: list[Result],
 ) -> None:
-    print("files: " + filesCount)
-    print("clases: " + classCount)
-    print("methods: " + methodCount)
-    for cls in results:
-        print(cls)
+    file = open("informe", "w")
+    file.write(f"directories: {dirCount}\n")
+    file.write(f"files: {filesCount}\n")
+    file.write(f"classes: {classCount}\n")
+    file.write(f"methods: {methodCount}\n")
+    for result in results:
+        file.write(result.toString() + "\n")
+    file.close()
 
 
 scanDirectory("testDir")
