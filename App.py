@@ -2,6 +2,7 @@ from Result import Result
 from classReader import readFile
 from pyFilesReader import getAllFilePaths
 
+
 def scanDirectory(dir: str):
     paths = []
 
@@ -15,21 +16,33 @@ def scanDirectory(dir: str):
     classCount = 0
 
     methodCount = 0
-    
+
     for result in totalResults:
-        if(result.hasClass()): classCount += 1
+        if result.hasClass():
+            classCount += 1
 
         methodCount += result.methodQty()
 
-    writeReportIntoFile(classCount, methodCount, totalResults)
+    writeReportIntoFile(
+        directoryCount, len(paths), classCount, methodCount, totalResults
+    )
 
-    print(classCount)
-    print(methodCount)
-    print(totalResults)
 
-def writeReportIntoFile(classCount: int, methodCount: int, results: list[Result]) -> None:
-    #ToDo
-    pass
-        
+def writeReportIntoFile(
+    dirCount: int,
+    filesCount: int,
+    classCount: int,
+    methodCount: int,
+    results: list[Result],
+) -> None:
+    file = open("informe", "w")
+    file.write(f"directories: {dirCount}\n")
+    file.write(f"files: {filesCount}\n")
+    file.write(f"classes: {classCount}\n")
+    file.write(f"methods: {methodCount}\n")
+    for result in results:
+        file.write(result.toString() + "\n")
+    file.close()
+
 
 scanDirectory("testDir")
