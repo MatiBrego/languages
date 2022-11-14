@@ -19,7 +19,10 @@ class Result:
         return len(self.methods)
 
     def __repr__(self) -> str:
-        r = "class: " + self.cls +" methods:"
+        if(self.hasClass()):
+            r = "class: " + self.cls +" methods:"
+        else:
+            r = "method: "
         for m in self.methods:
             r += " " + m
         return "{" + r + "}"

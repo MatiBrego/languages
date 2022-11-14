@@ -23,9 +23,9 @@ def scanDirectory(dir: str):
 
     writeReportIntoFile(classCount, methodCount, totalResults)
 
-    # print(classCount)
-    # print(methodCount)
-    # print(totalResults) 
+    print(classCount)
+    print(methodCount)
+    print(totalResults)
 
 def writeReportIntoFile(classCount: int, methodCount: int, results: list[Result]) -> None:
     #ToDo
