@@ -20,7 +20,7 @@ class Result:
 
     def __repr__(self) -> str:
         if(self.hasClass()):
-            r = "class: " + self.cls +" methods:"
+            r = "class: " + self.cls +"\n methods:"
         else:
             r = "method: "
         for m in self.methods:
