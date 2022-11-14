@@ -17,7 +17,7 @@ class car:
     def increaseOdometer(self):
         pass
 
-def factorial():
+def _factorial():
     pass
 
 

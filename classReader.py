@@ -12,8 +12,8 @@ def readFile(path: str) -> list[Result]:
     resultList = []
 
     while(currentLine < len(lines)):
-        cls = re.search(r"class ([a-zA-Z]+):", lines[currentLine])
-        method = re.search(r"def ([a-zA-Z]+)", lines[currentLine])
+        cls = re.search(r"class ([a-zA-Z_0-9]+):", lines[currentLine])
+        method = re.search(r"def ([a-zA-Z_0-9]+)", lines[currentLine])
         if cls != None:
             currentLine += 1
             methods = []
@@ -28,7 +28,7 @@ def readFile(path: str) -> list[Result]:
 
     return resultList
         
-def readMethodsInClass(methods: list[str], currentLine: int, lines: list[str]) -> list[object]:
+def readMethodsInClass(methods: list[str], currentLine: int, lines: list[str]) -> int:
     """
     Reads each method's name of a class and adds them into a list received as a parameter. 
     It also receives the current line from which to start, and returns where the class ended.
@@ -36,8 +36,8 @@ def readMethodsInClass(methods: list[str], currentLine: int, lines: list[str]) -
     linesLeft = lines[currentLine:]
 
     for line in linesLeft:
-        cls = re.search(r"class ([a-zA-Z]+):", line)
-        method = re.search(r"def ([a-zA-Z]+)", line)
+        cls = re.search(r"class ([a-zA-Z_0-9]+):", line)
+        method = re.search(r"def ([a-zA-Z_0-9]+)", line)
 
         if cls != None:
             currentLine -=1
